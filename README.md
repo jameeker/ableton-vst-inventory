@@ -34,8 +34,8 @@ Requires Node.js ≥ 22.
 
 ```sh
 npm install
-npm run build      # type-check + production bundle → dist/extension.js
-npm run package    # build + package as dist/ableton-vst-inventory.ablx
+npm run build   # Type-check + production bundle → dist/extension.js
+npm run package # Build + package as dist/ableton-vst-inventory.ablx
 ```
 
 Install the extension by dropping the `.ablx` file onto the Extensions page in Live's settings.
@@ -45,7 +45,7 @@ Install the extension by dropping the `.ablx` file onto the Extensions page in L
 Copy [`.env.example`](.env.example) to `.env` and set `EXTENSION_HOST_PATH` to your local Ableton Live installation (see the comments in that file for how to find it). Then enable **Developer Mode** in Live's Extensions preferences, and run:
 
 ```sh
-npm start          # build + launch the Extension Host with this extension
+npm start # Build + launch the Extension Host with this extension
 ```
 
 

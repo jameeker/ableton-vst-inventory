@@ -31,12 +31,12 @@ function confirmationHtml(filePath: string): string {
   </script>
   <style>
     body {
-      background-color: #4E4E4E; color: #FFF; font-family: sans-serif; font-size: 12px;
+      background-color: #262626; color: #FFF; font-family: sans-serif; font-size: 12px;
       margin: 0; height: 100vh; display: flex; flex-direction: column;
       justify-content: center; align-items: center; gap: 12px; padding: 16px; box-sizing: border-box;
     }
-    code { background-color: #2C2C2C; padding: 4px 8px; word-break: break-all; user-select: all; }
-    button { background-color: #FFA500; border: none; padding: 6px 16px; cursor: pointer; color: #000; }
+    code { background-color: #141414; padding: 4px 8px; word-break: break-all; user-select: all; }
+    button { background-color: #00E676; border: none; padding: 6px 16px; cursor: pointer; color: #101010; font-weight: 600; }
   </style>
 </head>
 <body>

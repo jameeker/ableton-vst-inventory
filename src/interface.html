@@ -62,12 +62,13 @@
   </script>
   <style>
     :root {
-      --ableton-bg: #383838;
-      --ableton-panel: #4E4E4E;
-      --ableton-button: #FFA500;
+      --ableton-bg: #1A1A1A;
+      --ableton-panel: #262626;
+      --ableton-button: #00E676;
+      --ableton-button-text: #101010;
       --ableton-text: #FFFFFF;
-      --ableton-border: #2C2C2C;
-      --ableton-input-bg: #2C2C2C;
+      --ableton-border: #000000;
+      --ableton-input-bg: #141414;
     }
     * { box-sizing: border-box; }
     body {
@@ -134,7 +135,8 @@
     }
     #export {
       background-color: var(--ableton-button);
-      color: #000;
+      color: var(--ableton-button-text);
+      font-weight: 600;
     }
     #cancel {
       background-color: var(--ableton-input-bg);
