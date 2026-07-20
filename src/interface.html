@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VST List Exporter — Plugin Inventory</title>
+  <script>
+    // Injected by the extension before the dialog is shown.
+    const plugins = __PLUGIN_DATA__;
+
+    function sendMessage(message) {
+      if (window.webkit?.messageHandlers?.live) {
+        window.webkit.messageHandlers.live.postMessage(message);
+      } else if (window.chrome?.webview) {
+        window.chrome.webview.postMessage(message);
+      }
+    }
+
+    function closeWithResult(result) {
+      sendMessage({ method: "close_and_send", params: [JSON.stringify(result)] });
+    }
+
+    function render() {
+      const query = document.getElementById("search").value.toLowerCase();
+      const format = document.getElementById("formatFilter").value;
+      const rows = plugins.filter((p) =>
+        (format === "all" || p.format === format) &&
+        p.name.toLowerCase().includes(query)
+      );
+      document.getElementById("count").textContent =
+        rows.length === plugins.length
+          ? plugins.length + " plugins"
+          : rows.length + " of " + plugins.length + " plugins";
+      const tbody = document.getElementById("rows");
+      tbody.textContent = "";
+      for (const p of rows) {
+        const tr = document.createElement("tr");
+        for (const value of [p.name, p.format]) {
+          const td = document.createElement("td");
+          td.textContent = value;
+          tr.appendChild(td);
+        }
+        tr.title = p.path;
+        tbody.appendChild(tr);
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("search").addEventListener("input", render);
+      document.getElementById("formatFilter").addEventListener("change", render);
+      document.getElementById("cancel").addEventListener("click", () => {
+        closeWithResult({ action: "cancel" });
+      });
+      document.getElementById("export").addEventListener("click", () => {
+        closeWithResult({
+          action: "export",
+          format: document.getElementById("exportFormat").value,
+        });
+      });
+      render();
+    });
+  </script>
+  <style>
+    :root {
+      --ableton-bg: #383838;
+      --ableton-panel: #4E4E4E;
+      --ableton-button: #FFA500;
+      --ableton-text: #FFFFFF;
+      --ableton-border: #2C2C2C;
+      --ableton-input-bg: #2C2C2C;
+    }
+    * { box-sizing: border-box; }
+    body {
+      background-color: var(--ableton-panel);
+      color: var(--ableton-text);
+      font-family: sans-serif;
+      font-size: 12px;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 12px;
+      gap: 8px;
+    }
+    .toolbar {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .toolbar input {
+      flex: 1;
+    }
+    input, select {
+      background-color: var(--ableton-input-bg);
+      color: var(--ableton-text);
+      border: 1px solid var(--ableton-border);
+      padding: 4px 6px;
+      font-size: 12px;
+    }
+    .list {
+      flex: 1;
+      overflow-y: auto;
+      background-color: var(--ableton-bg);
+      border: 1px solid var(--ableton-border);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      text-align: left;
+      padding: 4px 8px;
+      border-bottom: 1px solid var(--ableton-border);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    th {
+      position: sticky;
+      top: 0;
+      background-color: var(--ableton-panel);
+    }
+    .footer {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .footer .spacer { flex: 1; }
+    button {
+      border: none;
+      padding: 6px 16px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    #export {
+      background-color: var(--ableton-button);
+      color: #000;
+    }
+    #cancel {
+      background-color: var(--ableton-input-bg);
+      color: var(--ableton-text);
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <input id="search" type="text" placeholder="Filter by name…">
+    <select id="formatFilter">
+      <option value="all">All formats</option>
+      <option value="VST3">VST3</option>
+      <option value="VST2">VST2</option>
+      <option value="AU">AU</option>
+    </select>
+    <span id="count"></span>
+  </div>
+  <div class="list">
+    <table>
+      <thead>
+        <tr><th>Name</th><th>Format</th></tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+  <div class="footer">
+    <span class="spacer"></span>
+    <label for="exportFormat">Export as</label>
+    <select id="exportFormat">
+      <option value="json">JSON</option>
+      <option value="csv">CSV</option>
+      <option value="txt">TXT</option>
+      <option value="md">Markdown</option>
+    </select>
+    <button id="export">Export</button>
+    <button id="cancel">Cancel</button>
+  </div>
+</body>
+</html>

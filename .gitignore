@@ -95,6 +95,9 @@ dist
 # vuepress v2.x temp directory
 .temp
 
+# Local dev storage/temp dirs for Ableton Extension Host
+.storage
+
 # Sveltekit cache directory
 .svelte-kit/
 

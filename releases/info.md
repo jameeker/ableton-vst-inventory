@@ -1,0 +1,1 @@
+`releases/` - Where complete Ableton extensions live. Drop the `ableton-vst-inventory.ablx` file directly into Ableton's Extensions folder, or use Live's built-in "Install Extension…" dialog (drag-and-drop onto the Extensions settings page).

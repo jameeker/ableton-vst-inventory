@@ -1,0 +1,7 @@
+{
+    "name": "VST List Exporter",
+    "author": "jameeker",
+    "entry": "dist/extension.js",
+    "version": "0.1.0",
+    "minimumApiVersion": "1.0.0"
+}
