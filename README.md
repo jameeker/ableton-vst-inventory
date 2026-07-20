@@ -1,7 +1,8 @@
 # ableton-vst-inventory
-An Ableton Extension for discovering, organizing, and exporting all locally installed VST plugins (VST 3, AU, and other formats) from a single interface.
 
-A minimal Ableton Live Extension for scanning and exporting your entire set of local installed VSTs (VST 3, AU, VST 2, and more) in one organized list. Discover what you have and export to multiple different file types (JSON, CSV, TXT, MD) for reference or archival.
+A minimal Ableton Extension for exporting all locally-installed VST plugins (VST 3, AU, and other formats) into one organized list. Multiple output filetypes (JSON, CSV, TXT, MD).
+
+Discover what you have, for reference or archival purposes.
 
 ### Features:
 
